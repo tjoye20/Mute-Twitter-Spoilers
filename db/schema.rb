@@ -10,15 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908200457) do
+ActiveRecord::Schema.define(version: 20160908204735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "blockedphrases", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "mutedphrase_id"
+    t.string   "screen_name",    null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["mutedphrase_id"], name: "index_blockedphrases_on_mutedphrase_id", using: :btree
+    t.index ["user_id"], name: "index_blockedphrases_on_user_id", using: :btree
+  end
+
+  create_table "mutedphrases", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "phrase"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_mutedphrases_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "username",   null: false
-    t.string   "token",      null: false
-    t.string   "secret",     null: false
+    t.text     "token",      null: false
+    t.text     "secret",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
