@@ -16,7 +16,9 @@ RSpec.describe User, type: :model do
   context "when params are invalid" do
     it "raises errors" do
       expect(invalid_user.valid?).to eq false
-      expect(invalid_user.username).to eq nil
+      expect(invalid_user.id).to eq nil
+      expect(invalid_user.errors).to have_key :token
+      expect(invalid_user.errors).to have_key :secret
       expect(User.all).to eq [valid_user]
     end
   end
