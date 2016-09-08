@@ -1,15 +1,18 @@
 Rails.application.routes.draw do
 
-  resources :users
+  resources :users, only: [:create, :show]
+  #show page is your profile page. Showing you how many blocked phrases,
+  #and number of blocked users. 
 
   resources :mutedphrases do
     resources :blockedfollowers
   end
 
-  resources :sessions, only: [:destroy]
+  resources :sessions, only: [:new, :destroy]
 
-  get '/sign-in', to: "users#new", as: "sign-in"
+  get '/sign-in', to: "sessions#new", as: "sign-in"
+  #callsback to my users#create action to process the token.
   get '/logout', to: "sessions#destroy", as: "logout"
 
-  root "users#new"
+  root "sessions#new"
 end
