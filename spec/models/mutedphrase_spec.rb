@@ -9,6 +9,7 @@ RSpec.describe Mutedphrase, type: :model do
       expect(new_phrase.valid?).to eq true
       expect(Mutedphrase.all).to eq [new_phrase]
       expect(new_phrase.phrase).to eq "test phrase"
+      expect(valid_user.mutedphrases).to eq [new_phrase]
     end
   end
 
