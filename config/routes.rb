@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
 
+  #show page is your profile page. 
   resources :users, only: [:create, :show]
-  #show page is your profile page. Showing you how many blocked phrases,
-  #and number of blocked users.
 
   resources :mutedphrases do
     resources :blockedfollowers
