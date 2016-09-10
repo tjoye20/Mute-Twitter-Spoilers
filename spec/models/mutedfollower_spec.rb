@@ -5,21 +5,21 @@ RSpec.describe Mutedfollower, type: :model do
   let!(:new_phrase) {valid_user.mutedphrases.create(phrase: "test phrase")}
 
   context "when valid params are passed" do
-    it "saves the muted follower" do
-      new_muted_follower = new_phrase.mutedfollowers.create(screen_name: "tjonem", user_id: valid_user.id)
-      expect(new_muted_follower.valid?).to eq true
-      expect(Mutedfollower.all).to eq [new_muted_follower]
-      expect(new_muted_follower.id).to eq 1
-      expect(new_phrase.mutedfollowers).to eq [new_muted_follower]
+    it "saves a new muted follower" do
+      muted_follower = valid_user.mutedphrases.first.mutedfollowers.create(user_id: valid_user.id, screen_name: 'testing101')
+      expect(muted_follower.valid?).to eq true
+      expect(Mutedfollower.first).to eq muted_follower
+      expect(muted_follower.id).to eq 1
+      expect(valid_user.mutedfollowers).to eq [muted_follower]
     end
   end
 
   context "when invalid params are passed" do
-    it "saves the muted follower" do
-      new_muted_follower = new_phrase.mutedfollowers.create(screen_name: "tjonem")
-      expect(new_muted_follower.valid?).to eq false
+    it "doesn't save a new muted follower" do
+      muted_follower = valid_user.mutedphrases.first.mutedfollowers.create(user_id: valid_user.id, screen_name: '')
+      expect(muted_follower.valid?).to eq false
       expect(Mutedfollower.all.length).to eq 0
-      expect(new_muted_follower.id).to eq nil
+      expect(muted_follower.id).to eq nil
     end
   end
 end
