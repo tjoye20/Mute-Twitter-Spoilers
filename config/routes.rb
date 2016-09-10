@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
   get '/sign-in', to: "sessions#new", as: "sign-in"
-  #callsback to my users#create action to process the token.
+  get '/auth', to: "sessions#create"
   get '/logout', to: "sessions#destroy", as: "logout"
 
   root "sessions#new"
