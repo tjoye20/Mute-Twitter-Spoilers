@@ -19,16 +19,6 @@ RSpec.describe SessionsController, type: :controller do
     end
   end
 
-
-# not sure how to test the create action for oauth
-  # describe "POST #create" do
-  #   context "uses the autheticated user info to create a new User" do
-  #
-  #   end
-  # end
-
-
-
   describe "DELETE #destroy" do
     it "logs you out and clears out the session" do
       delete :destroy

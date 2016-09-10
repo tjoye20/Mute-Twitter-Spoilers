@@ -8,10 +8,10 @@ Rails.application.routes.draw do
     resources :blockedfollowers
   end
 
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:index, :new, :destroy]
 
   get '/sign-in', to: "sessions#new", as: "sign-in"
-  get '/auth', to: "sessions#create"
+  get '/auth', to: "users#create"
   get '/logout', to: "sessions#destroy", as: "logout"
 
   root "sessions#new"
