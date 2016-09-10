@@ -16,7 +16,10 @@ RSpec.describe Mutedfollower, type: :model do
 
   context "when invalid params are passed" do
     it "doesn't save a new muted follower" do
-
+      muted_follower = valid_user.mutedphrases.first.mutedfollowers.create(user_id: valid_user.id, screen_name: '')
+      expect(muted_follower.valid?).to eq false
+      expect(Mutedfollower.all.length).to eq 0
+      expect(muted_follower.id).to eq nil
     end
   end
 end
