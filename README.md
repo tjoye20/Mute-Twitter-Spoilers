@@ -5,7 +5,7 @@ Rails app that helps you quickly mute tweets on your timeline that contain spoil
 NOTE: APP IS STILL IN DEVELOPMENT.
 
 ### Project Goals
-This started as a one day Sinatra project, that I'm now converting into a Rails app in order to play around with the Twitter gem and implement OAuth, while practicing test-driven development.
+This started as a one day Sinatra project, that I'm now converting into a Rails app in order to play around with the Twitter gem and implement OAuth, while practicing test-driven development in Rails.
 
 ### How the app works
 You enter a keyword that you don't want to see tweets of on the search page, it returns the list of users whose recent tweets currently contain that keyword, by analyzing the first 200 tweets on your timeline. There's a button to "Show Tweets", if you want to see the contents of those user's tweets. Then, there's a "Mute Phrase" button that mutes those users, clearing your *current* timeline of tweets containing that phrase.
