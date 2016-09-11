@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  #show page is your profile page. 
+  #show page is your profile page.
   resources :users, only: [:create, :show]
 
   resources :mutedphrases do
@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   get '/auth', to: "users#create"
   get '/logout', to: "sessions#destroy", as: "logout"
 
-  root "sessions#new"
+  root "sessions#index"
 end

@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'pg'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'pry'
+gem 'rails-controller-testing'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
