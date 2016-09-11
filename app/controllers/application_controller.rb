@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :oauth_consumer, :request_token
+  helper_method :all
 
   private
 
@@ -20,16 +20,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  #Request token allows us to retrieve
-  #the user's access token.
-  #then come back to our callback url and
-
-  #sets the host to whatever server we're making the request on.
   def request_token
     if !session[:request_token]
       host_and_port = request.host
       if request.host == "localhost"
-        host_and_port << ":9393"
+        host_and_port << ":3000"
       end
       session[:request_token] = oauth_consumer.get_request_token(oauth_callback: "http://#{host_and_port}/auth")
     end

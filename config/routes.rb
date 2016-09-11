@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   #show page is your profile page.
-  resources :users, only: [:create, :show]
+  resources :users, only: [:create]
 
   resources :mutedphrases do
     resources :blockedfollowers

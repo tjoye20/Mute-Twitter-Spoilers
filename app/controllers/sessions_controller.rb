@@ -1,13 +1,12 @@
 class SessionsController < ApplicationController
 
-  #login page
   def index
   end
 
   #Starts OAuth process. Callsback to users#create
   def new
     if !current_user
-      redirect request_token.authorize_url
+      redirect_to request_token.authorize_url
     else
       redirect_to new_mutedphrase_path
     end

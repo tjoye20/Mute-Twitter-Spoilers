@@ -13,14 +13,14 @@ RSpec.describe SessionsController, type: :controller do
   end
 
 # Not sure how to test OAuth here, w/o actually making a request
-  # describe "GET #new" do
-  #   it "responds with status code 200" do
-  #     get :new
-  #     expect(response).to be_success
-  #     expect(response).to have_http_status 302
-  #     expect(response).to redirect_to("https://api.twitter.com")
-  #   end
-  # end
+  describe "GET #new" do
+    xit "responds with status code 200" do
+      get :new
+      expect(response).to be_success
+      expect(response).to have_http_status 302
+      expect(response).to redirect_to("https://api.twitter.com")
+    end
+  end
 
   describe "DELETE #destroy" do
     it "logs you out and clears out the session" do
