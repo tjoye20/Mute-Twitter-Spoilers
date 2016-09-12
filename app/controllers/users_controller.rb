@@ -1,20 +1,28 @@
 class UsersController < ApplicationController
 
   def create
-    @access_token = request_token.get_access_token(oauth_verifier: params[:oauth_verifier])
-    session[:request_token] = nil
-    user = nil
-      if !(User.find_by(username: @access_token.params[:screen_name]))
-        user = User.create(
-        username: @access_token.params[:screen_name],
-        token: @access_token.token,
-        secret: @access_token.secret
+    if params[:denied]
+      redirect_to sessions_path
+    else
+      # profile image: auth_hash.info[:image]
+      if !(User.find_by(username: auth_hash.info.nickname))
+        @user = User.create(
+        username: auth_hash.info.nickname,
+        token: auth_hash.extra.access_token.params[:oauth_token],
+        secret: auth_hash.extra.access_token.params[:oauth_token_secret]
         )
       else
-        user = User.find_by(username: @access_token.params[:screen_name])
+        @user = User.find_by(username: auth_hash.info.nickname)
       end
-    session[:user_id] = user.id
-    redirect_to new_mutedphrase_path
+      session[:user_id] = @user.id
+      redirect_to new_mutedphrase_path
+    end
+  end
+
+  protected
+
+  def auth_hash
+    request.env['omniauth.auth']
   end
 
 end
