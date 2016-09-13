@@ -8,8 +8,8 @@ class UsersController < ApplicationController
       if !(User.find_by(username: auth_hash.info.nickname))
         @user = User.create(
         username: auth_hash.info.nickname,
-        token: auth_hash.extra.access_token.params[:oauth_token],
-        secret: auth_hash.extra.access_token.params[:oauth_token_secret]
+        token: auth_hash.credentials.token,
+        secret: auth_hash.credentials.secret
         )
       else
         @user = User.find_by(username: auth_hash.info.nickname)
