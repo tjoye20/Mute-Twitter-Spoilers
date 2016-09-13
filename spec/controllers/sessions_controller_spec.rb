@@ -3,22 +3,34 @@ require 'rails_helper'
 RSpec.describe SessionsController, type: :controller do
   let!(:user) {User.create(username: "tjo", token: "hfajf8uuafaj", secret: "tlkjer09984r0=3")}
 
-  describe "GET #index" do
-    it "responds with status code 200" do
-      get :index
-      expect(response).to be_success
-      expect(response).to have_http_status 200
-      expect(response).to render_template(:index)
+  describe "GET #new" do
+    context "when there's no user logged in" do
+      it "responds with status code 200" do
+        get :new
+        expect(response).to be_success
+        expect(response).to have_http_status 200
+        expect(response).to render_template(:new)
+      end
+    end
+
+    context "when there's a user logged in" do
+      before(:each) do
+        session[:user_id] = user.id
+      end
+      it "responds with status code 302" do
+        get :new
+        expect(response).to have_http_status 302
+        expect(response).to redirect_to(new_mutedphrase_path)
+      end
     end
   end
 
-# Not sure how to test OAuth here, w/o actually making a request
-  describe "GET #new" do
-    xit "responds with status code 200" do
-      get :new
-      expect(response).to be_success
+  describe "GET #failure" do
+    it "responds with status code 302" do
+      get :failure
       expect(response).to have_http_status 302
-      expect(response).to redirect_to("https://api.twitter.com")
+      expect(response).to redirect_to(root_path)
+      expect(flash[:notice]).to eq("Sorry, but you didn't allow access to our app!")
     end
   end
 
