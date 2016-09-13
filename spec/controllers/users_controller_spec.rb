@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
 
-# Not sure how to test OAuth yet in create action.
+# Not sure how to test omniauth yet.
   describe "POST #create" do
     context 'when the user is a new user' do
       xit "creates a new user and logs them in" do

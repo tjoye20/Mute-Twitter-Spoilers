@@ -2,8 +2,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create]
 
-  resources :mutedphrases do
-    resources :blockedfollowers
+  resources :mutedphrases, only: [:index, :new, :create, :destroy] do
+    resources :blockedfollowers, only: [:index, :show, :create]
   end
 
   resources :sessions, only: [:new, :destroy, :failure]
