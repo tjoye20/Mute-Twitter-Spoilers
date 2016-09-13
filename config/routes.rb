@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
 
-  #show page is your profile page.
   resources :users, only: [:create]
 
   resources :mutedphrases do
     resources :blockedfollowers
   end
 
-  resources :sessions, only: [:index, :new, :destroy]
+  resources :sessions, only: [:new, :destroy, :failure]
 
   get '/sign-in', to: "sessions#new", as: "sign-in"
-  get '/auth', to: "users#create"
+  get '/auth/twitter/callback', to: "users#create"
   get '/logout', to: "sessions#destroy", as: "logout"
+  get '/auth/failure', to: "sessions#failure"
 
-  root "sessions#index"
+  root "sessions#new"
 end
