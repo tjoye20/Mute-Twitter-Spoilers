@@ -1,0 +1,2 @@
+module MutedphrasesHelper
+end
