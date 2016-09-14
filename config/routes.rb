@@ -2,15 +2,15 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create]
 
-  resources :mutedphrases, only: [:index, :new, :create, :show, :destroy]
-
   resources :mutedphrases do
     collection do
       get :results
     end
   end
 
-  #members require :id & collections don't 
+  resources :mutedphrases, only: [:index, :new, :create, :show, :destroy]
+
+  #members require :id & collections don't
   resources :mutedphrases do
     member do
       get :show_tweets

@@ -7,11 +7,11 @@ class MutedphrasesController < ApplicationController
   end
 
   def results
-    @results = search_results(params[:phrase_to_block])
+    @results = search_results(params[:phrase])
   end
 
   def create
-    phrase_to_block = params[:phrase_to_block]
+    phrase_to_block = params[:phrase]
     mute_phrase(phrase_to_block)
     redirect_to mutedphrases_path
   end
