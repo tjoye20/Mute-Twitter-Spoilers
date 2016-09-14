@@ -30,6 +30,15 @@ RSpec.describe MutedphrasesController, type: :controller do
     end
   end
 
+  describe "GET #results" do
+    xit "responds with status code 200" do
+      get :results
+      expect(response).to be_success
+      expect(response).to have_http_status 200
+      expect(response).to render_template(:results)
+    end
+  end
+
   describe "GET #show" do
     xit "responds with status code 200" do
       get :show
@@ -61,7 +70,7 @@ RSpec.describe MutedphrasesController, type: :controller do
       expect(Mutedfollower.all).to eq 2
       expect(Mutedfollower.last.id).to eq new_muted_follower.id
       expect(response).to have_http_status 302
-      expect(response).to redirect_to(mutedphrase_path)
+      expect(response).to redirect_to(mutedphrases_path)
     end
   end
 
