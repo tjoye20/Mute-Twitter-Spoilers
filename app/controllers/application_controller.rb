@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :all
-  
+
   private
 
   def current_user
@@ -33,22 +33,22 @@ class ApplicationController < ActionController::Base
 
   def mute_phrase(phrase_to_block)
     results = search_results(phrase_to_block)
-    new_blocked_phrase = BlockedPhrase.create(
+    new_blocked_phrase = MutedPhrase.create(
     phrase: phrase_to_block,
     user_id: current_user.id)
 
     results.each do |tweet|
       client.mute(tweet.user.screen_name)
-      BlockedFollower.create(
-      blocked_phrase_id: new_blocked_phrase.id,
-      follower: tweet.user.screen_name,
-      blocked_tweet: tweet.text)
+      MutedFollower.create(
+      mutedphrase_id: new_blocked_phrase.id,
+      screen_name: tweet.user.screen_name,
+      mutedtweet: tweet.text)
     end
   end
 
   def unmute_phrase(blocked_phrase_id)
-    phrase = BlockedPhrase.find(blocked_phrase_id)
-    followers = BlockedFollower.where(blocked_phrase_id: phrase.id)
+    phrase = MutedPhrase.find(blocked_phrase_id)
+    followers = MutedFollower.where(mutedphrase_id: phrase.id)
     followers.each do |user|
       client.unmute(user.follower)
     end

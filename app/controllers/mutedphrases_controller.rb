@@ -17,15 +17,13 @@ class MutedphrasesController < ApplicationController
   end
 
   def show
-    @Muted_phrase = MutedPhrase.find(params[:phrase_id])
+    @mutedphrase = MutedPhrase.find(params[:phrase_id])
     #in view, run @muted_phrase.mutedfollowers
     #don't show tweets
   end
 
   def show_tweets
-    @Muted_phrase = MutedPhrase.find(params[:phrase_id])
-    #in view, run @muted_phrase.mutedfollowers
-    #show tweets in this view.
+    @results = search_results(params[:phrase])
   end
 
   def destroy

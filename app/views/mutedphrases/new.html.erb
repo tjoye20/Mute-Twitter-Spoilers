@@ -1,5 +1,5 @@
 <%= form_tag(results_mutedphrases_path, method: "get") do %>
-  <%= label_tag(:q, "Search for:") %>
+  <%= label_tag(:q, "What phrase do you want to block?") %> <br />
    <%= text_field_tag(:phrase) %>
   <%= submit_tag("Search") %>
 <% end %>
