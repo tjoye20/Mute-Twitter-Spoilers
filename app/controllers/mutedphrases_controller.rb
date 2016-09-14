@@ -1,0 +1,2 @@
+class MutedphrasesController < ApplicationController
+end
