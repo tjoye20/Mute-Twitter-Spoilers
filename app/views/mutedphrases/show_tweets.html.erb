@@ -1,0 +1,26 @@
+<section>
+  <%=link_to("Mute Phrase", mutedphrases_path) %>
+  <%=link_to("Back to Search", new_mutedphrase_path) %>
+
+  <p>
+    There are currently <%= @results.length %> people tweeting about "<%= @phrase %>" on your timeline.
+  </p>
+
+  <% @results.each do |tweet| %>
+    <section>
+      <h3>
+        Username: <%= tweet.user.screen_name %>
+      </h3>
+
+      <%= image_tag(tweet.user.profile_image_url) %>
+
+      <p>
+        Tweet: <%= tweet.text %>
+      </p>
+
+    </section>
+  <% end %>
+  <%=link_to("Mute Phrase", mutedphrases_path) %>
+  <%=link_to("Back to Search", new_mutedphrase_path) %>
+
+</section>

@@ -1,4 +1,4 @@
-class Mutedfollower < ApplicationRecord
+class MutedFollower < ApplicationRecord
   belongs_to :user
   belongs_to :mutedphrase
 

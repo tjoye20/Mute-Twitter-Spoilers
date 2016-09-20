@@ -1,0 +1,12 @@
+<section>
+  <% @mutedphrases.each do |phrase_obj| %>
+    <p>
+    Phrase: <%= phrase_obj.phrase %>
+    </p>
+    <p>
+      Number of muted followers:   <%= phrase_obj.mutedfollowers.count %>
+    </p>
+    <%= link_to "See Muted Phrase info", mutedphrase_path(phrase_obj.id) %>
+    <%= button_to "Un-mute Phrase and followers", mutedphrase_path(phrase_obj.id), method: :delete, data: { confirm: "Are you sure you want to unmute this phrase and the associated followers?" } %> <br />
+  <% end %>
+</section>

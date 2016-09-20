@@ -1,5 +1,7 @@
+<%= render "layouts/flash" %>
+
 <%= form_tag(results_mutedphrases_path, method: "get") do %>
-  <%= label_tag(:q, "Search for:") %>
+  <%= label_tag(:q, "What spoiler phrase do you want to mute?") %> <br />
    <%= text_field_tag(:phrase) %>
   <%= submit_tag("Search") %>
 <% end %>
