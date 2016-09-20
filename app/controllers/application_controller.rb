@@ -36,8 +36,9 @@ class ApplicationController < ActionController::Base
     new_blocked_phrase = Phrase.create(
     phrase: phrase_to_block,
     user_id: current_user.id)
-    client.mute(tweet.user.screen_name)
+
     results.each do |tweet|
+      client.mute(tweet.user.screen_name)
       Follower.create(
       user_id: current_user.id,
       phrase_id: new_blocked_phrase.id,
@@ -50,7 +51,7 @@ class ApplicationController < ActionController::Base
     phrase = Phrase.find(blocked_phrase_id)
     followers = Follower.where(phrase_id: phrase.id)
     followers.each do |user|
-      client.unmute(user.follower)
+      client.unmute(user.screen_name)
     end
     phrase.destroy
     followers.destroy_all
