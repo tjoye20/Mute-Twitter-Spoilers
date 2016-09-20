@@ -1,6 +1,10 @@
 class MutedphrasesController < ApplicationController
   def index
-    @mutedphrases = Mutedphrase.where(user_id: current_user.id)
+    if Phrase.where(user_id: current_user.id).empty?
+      redirect_to new_mutedphrase_path, notice: "Sorry, you don't have any muted phrases right now. Search for a phrase you want to mute."
+    else
+      @mutedphrases = Phrase.where(user_id: current_user.id)
+    end
   end
 
   def new
@@ -27,7 +31,7 @@ class MutedphrasesController < ApplicationController
   end
 
   def show
-    @mutedphrase = MutedPhrase.find(params[:phrase_id])
+    @mutedphrase = Phrase.find(params[:phrase_id])
     #in view, run @muted_phrase.mutedfollowers
     #don't show tweets
   end

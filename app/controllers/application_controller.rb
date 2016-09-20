@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    @current_user ||= User.find(session[:user_id])
+    @current_user ||= (User.find(session[:user_id]) if session[:user_id])
   end
 
   def client
@@ -33,22 +33,22 @@ class ApplicationController < ActionController::Base
 
   def mute_phrase(phrase_to_block)
     results = search_results(phrase_to_block)
-    new_blocked_phrase = MutedPhrase.create(
+    new_blocked_phrase = Phrase.create(
     phrase: phrase_to_block,
     user_id: current_user.id)
 
     results.each do |tweet|
       client.mute(tweet.user.screen_name)
-      MutedFollower.create(
-      mutedphrase_id: new_blocked_phrase.id,
+      Follower.create(
+      phrase_id: new_blocked_phrase.id,
       screen_name: tweet.user.screen_name,
       mutedtweet: tweet.text)
     end
   end
 
   def unmute_phrase(blocked_phrase_id)
-    phrase = MutedPhrase.find(blocked_phrase_id)
-    followers = MutedFollower.where(mutedphrase_id: phrase.id)
+    phrase = Phrase.find(blocked_phrase_id)
+    followers = Follower.where(phrase_id: phrase.id)
     followers.each do |user|
       client.unmute(user.follower)
     end

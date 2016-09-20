@@ -1,3 +1,6 @@
+<%=link_to("Home", mutedphrases_path) %>
+<%=link_to("Search", new_mutedphrase_path) %>
+
 <section>
   <%= @mutedphrase.phrase%>
   <% @mutedphrase.mutedfollowers.each do |follower| %>
