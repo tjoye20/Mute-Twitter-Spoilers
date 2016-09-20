@@ -21,7 +21,7 @@
   <% end %>
 
   <%=link_to("Show Tweets", show_tweets_mutedphrases_path) %>
-  <%=link_to("Mute Phrase", mutedphrases_path) %>
+  <%=link_to("Mute Phrase", mutedphrases_path, method: :post) %>
   <%=link_to("Back to Search", new_mutedphrase_path) %>
 
 </section>

@@ -3,7 +3,7 @@
 
 <section>
   <%= @mutedphrase.phrase%>
-  <% @mutedphrase.mutedfollowers.each do |follower| %>
+  <% @followers.each do |follower| %>
     <%= follower.screen_name %>
     <%= follower.mutedtweet %>
   <% end %>

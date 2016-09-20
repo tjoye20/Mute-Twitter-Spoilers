@@ -20,7 +20,7 @@ class MutedphrasesController < ApplicationController
   end
 
   def create
-    phrase_to_block = params[:phrase]
+    phrase_to_block = session[:search_phrase]
     mute_phrase(phrase_to_block)
     redirect_to mutedphrases_path
   end
@@ -31,13 +31,12 @@ class MutedphrasesController < ApplicationController
   end
 
   def show
-    @mutedphrase = Phrase.find(params[:phrase_id])
-    #in view, run @muted_phrase.mutedfollowers
-    #don't show tweets
+    @mutedphrase = Phrase.find(params[:id])
+    @followers = Follower.where(phrase_id: @mutedphrase.id)
   end
 
   def destroy
-    unmute_phrase(params[:phrase_id])
+    unmute_phrase(params[:id])
     redirect_to mutedphrases_path
   end
 end

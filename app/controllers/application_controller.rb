@@ -36,10 +36,10 @@ class ApplicationController < ActionController::Base
     new_blocked_phrase = Phrase.create(
     phrase: phrase_to_block,
     user_id: current_user.id)
-
+    client.mute(tweet.user.screen_name)
     results.each do |tweet|
-      client.mute(tweet.user.screen_name)
       Follower.create(
+      user_id: current_user.id,
       phrase_id: new_blocked_phrase.id,
       screen_name: tweet.user.screen_name,
       mutedtweet: tweet.text)
