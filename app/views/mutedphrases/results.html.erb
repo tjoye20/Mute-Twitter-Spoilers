@@ -1,11 +1,20 @@
 <section>
   <%=link_to("Show Tweets", show_tweets_mutedphrases_path) %>
+  <%=link_to("Mute Phrase", mutedphrases_path) %>
 
   <% @results.each do |tweet| %>
-    <p>
+  <section>
+
+    <h3>
       Username: <%= tweet.user.screen_name %>
-    </p>
+    </h3>
+    
+    <%= image_tag(tweet.user.profile_image_url) %>
+
+  </section>
   <% end %>
 
   <%=link_to("Show Tweets", show_tweets_mutedphrases_path) %>
+  <%=link_to("Mute Phrase", mutedphrases_path) %>
+
 </section>
