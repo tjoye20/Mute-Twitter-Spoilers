@@ -7,6 +7,7 @@ class MutedphrasesController < ApplicationController
   end
 
   def results
+    session[:search_phrase] = params[:phrase]
     @results = search_results(params[:phrase])
   end
 
@@ -16,14 +17,15 @@ class MutedphrasesController < ApplicationController
     redirect_to mutedphrases_path
   end
 
+  def show_tweets
+    phrase = session[:search_phrase]
+    @results = search_results(phrase)
+  end
+
   def show
     @mutedphrase = MutedPhrase.find(params[:phrase_id])
     #in view, run @muted_phrase.mutedfollowers
     #don't show tweets
-  end
-
-  def show_tweets
-    @results = search_results(params[:phrase])
   end
 
   def destroy
