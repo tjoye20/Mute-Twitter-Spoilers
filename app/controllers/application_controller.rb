@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     count: 100, exclude_replies: true)
     @results = []
     user_timeline.each do |tweet|
-      if tweet.text.include?(phrase_to_block)
+      if tweet.text.downcase.include?(phrase_to_block)
         @results << tweet
       end
     end
