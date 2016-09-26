@@ -28,6 +28,5 @@ CONSUMER_SECRET=XXXXXXXXXXXXXXXXXX
 ### Remaining Backlog Items
 
 * Figure out how to automate this process.
-* Update the UI.
 * Turn it into a browser extension.
 * Turn it into a React Native app (just to learn React Native).
