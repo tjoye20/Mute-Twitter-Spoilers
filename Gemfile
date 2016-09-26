@@ -37,7 +37,6 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'twitter'
 gem "binding_of_caller"
-gem 'vcr'
 gem 'webmock'
 
 group :development, :test do

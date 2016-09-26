@@ -1,10 +1,4 @@
 require 'rails_helper'
-require 'vcr'
-
-VCR.configure do |config|
-  config.cassette_library_dir = "fixtures/vcr_cassettes"
-  config.hook_into :webmock # or :fakeweb
-end
 
 RSpec.describe SessionsController, type: :controller do
   let!(:user) {User.create(username: "tjo", token: "hfajf8uuafaj", secret: "tlkjer09984r0=3")}
@@ -12,13 +6,10 @@ RSpec.describe SessionsController, type: :controller do
   describe "GET #new" do
     context "when there's no user logged in" do
       it "responds with status code 200" do
-        VCR.use_cassette("synopsis") do
           get :new
-
           expect(response).to be_success
           expect(response).to have_http_status 200
           expect(response).to render_template(:new)
-      end
     end
 
     context "when there's a user logged in" do
@@ -32,7 +23,7 @@ RSpec.describe SessionsController, type: :controller do
       end
     end
   end
-end 
+end
 
   describe "GET #failure" do
     it "responds with status code 302" do
