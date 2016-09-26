@@ -1,19 +1,24 @@
-<%=link_to("Home", mutedphrases_path) %>
-<%=link_to("Search", new_mutedphrase_path) %>
+<section class="ui two item menu">
+  <%=link_to("Home", mutedphrases_path, class: "item") %>
+  <%=link_to("Search", new_mutedphrase_path, class: "item") %>
+</section>
 
-<section>
-  <h2>
-    Phrase:   <%= @mutedphrase.phrase%>
-  </h2>
-  <% @followers.each do |follower| %>
-    <h3>
-      Follower name: <%= follower.screen_name %>
-    </h3>
 
-    <p>
-      Tweet: <%= follower.mutedtweet %>
-    </p>
+<section class="ui list">
+  <section class="item three wide">
+    <h2 class="header">
+      Phrase:   <%= @mutedphrase.phrase%>
+    </h2>
+    <% @followers.each do |follower| %>
+      <h3 class="header">
+        Follower name: <%= follower.screen_name %>
+      </h3>
 
-  <% end %>
-  <%= button_to "Un-mute Phrase and followers", mutedphrase_path(@mutedphrase.id), method: :delete, data: { confirm: "Are you sure you want to unmute this phrase and the associated followers?" } %> <br />
+      <p class="description">
+        Tweet: <%= follower.mutedtweet %>
+      </p>
+
+    <% end %>
+    <%= button_to "Un-mute Phrase and followers", mutedphrase_path(@mutedphrase.id), method: :delete, data: { confirm: "Are you sure you want to unmute this phrase and the associated followers?" } %> <br />
+  </section>
 </section>
