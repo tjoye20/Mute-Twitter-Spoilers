@@ -1,27 +1,27 @@
 <section>
-  <%=link_to("Home", mutedphrases_path) %>
-  <%=link_to("Show Tweets", show_tweets_mutedphrases_path) %>
-  <%=link_to("Mute Phrase", mutedphrases_path) %>
-  <%=link_to("Back to Search", new_mutedphrase_path) %>
+  <%= render "layouts/tweets_menu" %>
+  <br />
 
-  <p>
-    There are currently <%= @results.length %> people tweeting about "<%= @phrase %>" on your timeline.
-  </p>
+  <section class="ui compact message">
+    <p class="header">
+      There are currently <%= @results.length %> people tweeting about "<%= @phrase %>" on your timeline.
+    </p>
+  </section>
 
   <% @results.each do |tweet| %>
-  <section>
-
-    <h3>
-      Username: <%= tweet.user.screen_name %>
-    </h3>
-
-    <%= image_tag(tweet.user.profile_image_url) %>
-
+  <section class="ui grid">
+    <section class="ui list">
+      <section class="item two wide">
+        <%= image_tag(tweet.user.profile_image_url, class: "ui avatar image") %>
+        <section class="content two wide">
+          <h3 class="header">
+            Username: <%= tweet.user.screen_name %>
+          </h3>
+        </section>
+      </section>
+    </section>
   </section>
   <% end %>
-
-  <%=link_to("Show Tweets", show_tweets_mutedphrases_path) %>
-  <%=link_to("Mute Phrase", mutedphrases_path, method: :post) %>
-  <%=link_to("Back to Search", new_mutedphrase_path) %>
-
+  <br />
+  <%= render "layouts/tweets_menu" %>
 </section>

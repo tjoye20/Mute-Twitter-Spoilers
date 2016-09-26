@@ -1,6 +1,8 @@
-<section class="navbar">
+<section class="ui secondary menu">
   <% if current_user %>
-<span>Welcome, <%=current_user.username %></span> |
-  <%= link_to("Logout", logout_path) %>
-  <% end %>
+  <section class="right menu">
+    <i class="header item">Welcome, <%=current_user.username %></i>
+    <%= link_to("Logout", logout_path, class: "item") %>
+    <% end %>
+  </section>
 </section>

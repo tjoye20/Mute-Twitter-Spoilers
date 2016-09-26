@@ -1,13 +1,17 @@
-<%=link_to("Search", new_mutedphrase_path) %>
+<section class="ui middle aligned center aligned grid">
+  <%=link_to("Search", new_mutedphrase_path, class: "ui primary button") %>
 
-<section>
-  <% @mutedphrases.each do |phrase_obj| %>
-    <p>
-    Phrase: <%= phrase_obj.phrase %>
-    </p>
-    <p>
-    </p>
-    <%= link_to "See Muted Phrase info", mutedphrase_path(phrase_obj.id) %>
-    <%= button_to "Un-mute Phrase and followers", mutedphrase_path(phrase_obj.id), method: :delete, data: { confirm: "Are you sure you want to unmute this phrase and the associated followers?" } %> <br />
-  <% end %>
+  <section class="ui three item menu">
+    <section class="content two wide">
+    <% @mutedphrases.each do |phrase_obj| %>
+      <strong>
+        <p class="header">
+          Phrase: <%= phrase_obj.phrase %>
+        </p>
+      </strong>
+      <%= link_to "See Muted Phrase info", mutedphrase_path(phrase_obj.id) %>
+      <%= button_to "Un-mute Phrase and followers", mutedphrase_path(phrase_obj.id), method: :delete, data: { confirm: "Are you sure you want to unmute this phrase and the associated followers?" } %> <br />
+    <% end %>
+    </section>
+  </section>
 </section>
