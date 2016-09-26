@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-
   has_many :phrases
   has_many :followers, through: :phrases
 

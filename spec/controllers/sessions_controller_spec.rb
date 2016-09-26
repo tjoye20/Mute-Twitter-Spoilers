@@ -6,11 +6,10 @@ RSpec.describe SessionsController, type: :controller do
   describe "GET #new" do
     context "when there's no user logged in" do
       it "responds with status code 200" do
-        get :new
-        expect(response).to be_success
-        expect(response).to have_http_status 200
-        expect(response).to render_template(:new)
-      end
+          get :new
+          expect(response).to be_success
+          expect(response).to have_http_status 200
+          expect(response).to render_template(:new)
     end
 
     context "when there's a user logged in" do
@@ -24,6 +23,7 @@ RSpec.describe SessionsController, type: :controller do
       end
     end
   end
+end
 
   describe "GET #failure" do
     it "responds with status code 302" do

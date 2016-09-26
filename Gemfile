@@ -37,6 +37,7 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'twitter'
 gem "binding_of_caller"
+gem 'webmock'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
