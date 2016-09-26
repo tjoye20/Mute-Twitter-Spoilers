@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root "sessions#new"
+
   resources :users, only: [:create]
 
   #members require :id & collections don't
@@ -17,5 +19,4 @@ Rails.application.routes.draw do
   get '/logout', to: "sessions#destroy", as: "logout"
   get '/auth/failure', to: "sessions#failure"
 
-  root "sessions#new"
 end
