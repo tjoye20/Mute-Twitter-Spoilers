@@ -22,13 +22,13 @@ class ApplicationController < ActionController::Base
   def search_results(phrase_to_block)
     user_timeline = client.home_timeline(
     count: 100, exclude_replies: true)
-    @results = []
+    results = []
     user_timeline.each do |tweet|
       if tweet.text.downcase.include?(phrase_to_block) && (tweet.user.screen_name != current_user.username)
-        @results << tweet
+        results << tweet
       end
     end
-    @results
+    results
   end
 
   def mute_phrase(phrase_to_block)
