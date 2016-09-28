@@ -6,20 +6,20 @@ RSpec.describe Follower, type: :model do
 
   context "when valid params are passed" do
     it "saves a new muted follower" do
-      muted_follower = valid_user.phrases.first.followers.create(user_id: valid_user.id, screen_name: 'testing101')
+      muted_follower = Follower.create(user_id: valid_user.id, phrase_id: new_phrase.id, screen_name: 'testing101')
       expect(muted_follower.valid?).to eq true
       expect(Follower.first).to eq muted_follower
       expect(muted_follower.id).to eq 1
-      expect(valid_user.followers).to eq [muted_follower]
     end
   end
 
   context "when invalid params are passed" do
     it "doesn't save a new muted follower" do
-      muted_follower = valid_user.phrases.first.followers.create(user_id: valid_user.id, screen_name: '')
+      muted_follower = Follower.create(user_id: valid_user.id, phrase_id: new_phrase.id, screen_name: '')
       expect(muted_follower.valid?).to eq false
       expect(Follower.all.length).to eq 0
       expect(muted_follower.id).to eq nil
+      expect(muted_follower.errors.any?).to eq true
     end
   end
 end
