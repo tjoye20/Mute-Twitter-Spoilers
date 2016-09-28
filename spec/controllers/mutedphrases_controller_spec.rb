@@ -4,8 +4,8 @@ RSpec.describe MutedphrasesController, type: :controller do
   let!(:user) {User.create(username: "tjo", token: "hfajf8uuafaj", secret: "tlkjer09984r0=3")}
   let!(:phrase_to_block) {"NFL"}
   # let!(:results) {search_results(phrase_to_block)}
-  let(:new_muted_phrase) {Mutedphrase.create()}
-  let(:new_muted_follower) {Mutedfollower.create()}
+  let(:new_muted_phrase) {Phrase.create()}
+  let(:new_muted_follower) {Follower.create()}
 
 #not yet sure how to handle APIs wrapped in helper methods w/ RSpec
 #these tests are not yet complete. Have to study more RSpec
@@ -58,17 +58,13 @@ RSpec.describe MutedphrasesController, type: :controller do
   end
 
   describe "POST #create" do
-    let :params do
-          {mutedphrase: {user_id: user.id, phrase: "testphrase"}
-        mutedfollower: {user_id: , mutedphrase_id: , screen_name: }}
-        end
     xit "responds with status code 302" do
       post :create
       # expect{post(:create, params)}.to change(Mutedphrase, :count).by(1)
-      expect(Mutedphrase.all).to eq 2
-      expect(Mutedphrase.last.id).to eq new_muted_phrase.id
-      expect(Mutedfollower.all).to eq 2
-      expect(Mutedfollower.last.id).to eq new_muted_follower.id
+      expect(Phrase.all).to eq 2
+      expect(Phrase.last.id).to eq new_muted_phrase.id
+      expect(Follower.all).to eq 2
+      expect(Follower.last.id).to eq new_muted_follower.id
       expect(response).to have_http_status 302
       expect(response).to redirect_to(mutedphrases_path)
     end
@@ -77,10 +73,10 @@ RSpec.describe MutedphrasesController, type: :controller do
   describe "DELETE #destroy" do
     xit "logs you out and clears out the session" do
       delete :destroy
-      expect(Mutedphrase.all).to eq 1
-      expect(Mutedphrase.first).to eq new_muted_phrase
-      expect(Mutedfollower.all).to eq 1
-      expect(Mutedfollower.first).to eq new_muted_follower
+      expect(Phrase.all).to eq 1
+      expect(Phrase.first).to eq new_muted_phrase
+      expect(Follower.all).to eq 1
+      expect(Follower.first).to eq new_muted_follower
       expect(response).to have_http_status 302
       expect(response).to redirect_to(mutedphrases_path)
     end
