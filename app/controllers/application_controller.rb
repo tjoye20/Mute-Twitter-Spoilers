@@ -36,16 +36,25 @@ class ApplicationController < ActionController::Base
     new_blocked_phrase = Phrase.create(
     phrase: phrase_to_block,
     user_id: current_user.id)
+    array_of_screen_names = []
+    array_of_tweets = []
 
     results.each do |tweet|
-      if !client.muted.include?(tweet.user.screen_name)
-        client.mute(tweet.user.screen_name)
-        Follower.create(
-        user_id: current_user.id,
-        phrase_id: new_blocked_phrase.id,
-        screen_name: tweet.user.screen_name,
-        mutedtweet: tweet.text)
+      if !array_of_screen_names.include?(tweet.user.screen_name)
+        array_of_screen_names << tweet.user.screen_name
+        array_of_tweets << tweet.text
       end
+    end
+
+    hash_of_tweets_and_names = array_of_screen_names.zip(array_of_tweets).to_h
+
+    hash_of_tweets_and_names.each do |name, tweet|
+      client.mute(name)
+      Follower.create(
+      user_id: current_user.id,
+      phrase_id: new_blocked_phrase.id,
+      screen_name: name,
+      mutedtweet: tweet)
     end
   end
 
