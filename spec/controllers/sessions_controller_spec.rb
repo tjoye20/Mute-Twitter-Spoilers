@@ -38,7 +38,7 @@ end
     it "logs you out and clears out the session" do
       delete :destroy
       expect(session[:user_id]).to eq nil
-      expect(flash[:notice]).to eq("Logged out!")
+      expect(flash[:alert]).to eq("Logged out!")
       expect(response).to redirect_to root_path
     end
   end
