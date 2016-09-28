@@ -6,7 +6,7 @@ RSpec.describe Follower, type: :model do
 
   context "when valid params are passed" do
     it "saves a new muted follower" do
-      muted_follower = Follower.create(user_id: valid_user.id, phrase_id: new_phrase.id, screen_name: 'testing101')
+      muted_follower = Follower.create(user_id: valid_user.id, phrase_id: new_phrase.id, screen_name: 'testing101', mutedtweet: "this is a test phrase")
       expect(muted_follower.valid?).to eq true
       expect(Follower.first).to eq muted_follower
       expect(muted_follower.id).to eq 1
