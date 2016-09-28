@@ -38,16 +38,13 @@ class ApplicationController < ActionController::Base
     user_id: current_user.id)
     array_of_screen_names = []
     array_of_tweets = []
-
     results.each do |tweet|
       if !array_of_screen_names.include?(tweet.user.screen_name)
         array_of_screen_names << tweet.user.screen_name
         array_of_tweets << tweet.text
       end
     end
-
     hash_of_tweets_and_names = array_of_screen_names.zip(array_of_tweets).to_h
-
     hash_of_tweets_and_names.each do |name, tweet|
       client.mute(name)
       Follower.create(
