@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     count: 100, exclude_replies: true)
     @results = []
     user_timeline.each do |tweet|
-      if tweet.text.downcase.include?(phrase_to_block)
+      if tweet.text.downcase.include?(phrase_to_block) && (tweet.user.screen_name != current_user.username)
         @results << tweet
       end
     end
@@ -51,7 +51,9 @@ class ApplicationController < ActionController::Base
     phrase = Phrase.find(blocked_phrase_id)
     followers = Follower.where(phrase_id: phrase.id)
     followers.each do |user|
-      client.unmute(user.screen_name)
+      if !client.muted.include?(user.screen_name)
+        client.unmute(user.screen_name)
+      end
     end
     phrase.destroy
     followers.destroy_all
