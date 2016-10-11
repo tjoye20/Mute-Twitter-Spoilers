@@ -11,7 +11,7 @@ class MutedphrasesController < ApplicationController
   end
 
   def results
-    session[:search_phrase] = params[:phrase].downcase
+    session[:search_phrase] = params[:phrase]
     @phrase = session[:search_phrase]
     @results = search_results(@phrase)
     if @results.empty?
