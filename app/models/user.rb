@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :phrases
-  has_many :followers, through: :phrases
+  has_many :phrases, dependent: :destroy
+  has_many :followers, through: :phrases, dependent: :destroy
 
   validates_presence_of :username, :token, :secret
   validates_uniqueness_of :username, :token, :secret
