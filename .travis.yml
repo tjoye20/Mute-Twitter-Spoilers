@@ -9,5 +9,6 @@ services:
 
 script: bundle exec rspec spec
 
+
 before_script:
   - RAILS_ENV=test bundle exec rake db:create
