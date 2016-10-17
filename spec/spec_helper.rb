@@ -1,4 +1,6 @@
 require 'omniauth'
+require 'simplecov'
+SimpleCov.start
 
 OmniAuth.config.test_mode = true
 auth_hash = { 'provider' => 'twitter',
