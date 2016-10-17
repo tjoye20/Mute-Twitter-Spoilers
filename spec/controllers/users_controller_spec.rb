@@ -2,23 +2,35 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
 
-# Not sure how to test omniauth yet.
+  before do
+    request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:twitter]
+  end
+
   describe "POST #create" do
-    context 'when the user is a new user' do
-      xit "creates a new user and logs them in" do
-        # expect{post(:create, params)}.to change(User, :count).by(1)
+    context "when the user is a new user" do
+      it "creates a user and redirects to new_mutedphrase_path" do
+        expect {
+          post :create, provider: :twitter
+        }.to change{ User.count }.by(1)
+        expect(session[:user_id]).to_not be_nil
         expect(response).to have_http_status 302
-        expect(session[:user_id]).to eq(User.last.id)
-        expect(flash[:notice]).to eq("Signup successful!")
         expect(response).to redirect_to new_mutedphrase_path
       end
     end
 
-    context "when the user is a returning user" do
-      xit "logs the user in" do
+    context "when it's a RETURNING user" do
+      before do
+        User.create(username: "tjo",
+        token: "123595",
+        secret: "jfajflajfa8980")
+      end
+
+      it "finds the user and redirects to new_mutedphrase_path" do
+        post :create, provider: :twitter
+        expect(User.find_by(username: 'tjo')).to be_a User 
+        expect(session[:user_id]).to_not be_nil
+        expect(response).to redirect_to new_mutedphrase_path
         expect(response).to have_http_status 302
-        expect(session[:user_id]).to eq(User.find(num).id)
-        expect(flash[:notice]).to eq("Logged in!")
         expect(response).to redirect_to new_mutedphrase_path
       end
     end
