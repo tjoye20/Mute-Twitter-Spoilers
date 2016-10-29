@@ -1,30 +1,23 @@
 <section>
-  <%= render "layouts/show_tweets_menu" %>
-  <br />
+  <%= render "layouts/show_tweets_menu" %> <br />
 
-  <section class="ui compact message">
-    <p class="header">
-      There are currently <%= @results.length %> people tweeting about "<%= @phrase %>" on your timeline.
-    </p>
-  </section>
+  <%= render "layouts/search_status" %>
 
   <% @results.each do |tweet| %>
-  <section class="ui grid">
-    <section class="ui list">
-      <section class="item three wide">
-        <%= image_tag(tweet.user.profile_image_url, class: "ui avatar image") %>
-        <section class="content three wide">
-          <h3 class="header">
-            Username: <%= tweet.user.screen_name %>
-          </h3>
-          <article class="description">
-            Tweet: <%= tweet.text %>
-          </article>
+    <section class="ui grid">
+      <section class="ui list">
+        <section class="item three wide">
+          <%= image_tag(tweet.user.profile_image_url, class: "ui avatar image") %>
+          <section class="content three wide">
+            <h3 class="header">
+              Username: <%= tweet.user.screen_name %>
+            </h3>
+            <article class="description">
+              Tweet: <%= tweet.text %>
+            </article>
+          </section>
         </section>
       </section>
     </section>
-  </section>
   <% end %>
-  <br />
-  <%= render "layouts/show_tweets_menu" %>
 </section>

@@ -9,10 +9,9 @@ class MutedphrasesController < ApplicationController
 
   def results
     session[:search_phrase] = params[:phrase]
-    @phrase = session[:search_phrase]
-    @results = search_results(@phrase)
+    @results = search_results(session[:search_phrase])
     if @results.empty?
-      redirect_to new_mutedphrase_path, notice: "There were no tweets about '#{@phrase}' on your timeline right now. Please search something else."
+      redirect_to new_mutedphrase_path, notice: "There were no tweets about '#{session[:search_phrase]}' on your timeline right now. Please search something else."
     end
   end
 
@@ -24,8 +23,7 @@ class MutedphrasesController < ApplicationController
   end
 
   def show_tweets
-    @phrase = session[:search_phrase]
-    @results = search_results(@phrase)
+    @results = search_results(session[:search_phrase])
   end
 
   def show
