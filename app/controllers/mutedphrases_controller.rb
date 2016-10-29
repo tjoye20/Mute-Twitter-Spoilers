@@ -19,7 +19,8 @@ class MutedphrasesController < ApplicationController
   def create
     phrase_to_block = session[:search_phrase]
     results = search_results(phrase_to_block)
-    Phrase.mute_phrase(phrase_to_block, results, current_user, client)
+    hash_of_tweets_and_names = Phrase.mute_phrase_return_hash(phrase_to_block, results, current_user)
+    Follower.mute_follower(hash_of_tweets_and_names, Phrase.last.id, current_user, client)
     redirect_to mutedphrases_path
   end
 

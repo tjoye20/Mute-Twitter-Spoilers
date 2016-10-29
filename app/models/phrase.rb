@@ -6,8 +6,8 @@ class Phrase < ApplicationRecord
   validates_length_of :phrase, minimum: 1, too_short: "This entry is too short."
 
   protected
-  
-  def self.mute_phrase(phrase_to_block, results, current_user, client)
+
+  def self.mute_phrase_return_hash(phrase_to_block, results, current_user)
     new_blocked_phrase = Phrase.create(
     phrase: phrase_to_block,
     user_id: current_user.id)
@@ -19,15 +19,7 @@ class Phrase < ApplicationRecord
         array_of_tweets << tweet.text
       end
     end
-    hash_of_tweets_and_names = array_of_screen_names.zip(array_of_tweets).to_h
-    hash_of_tweets_and_names.each do |name, tweet|
-      client.mute(name)
-      Follower.create(
-      user_id: current_user.id,
-      phrase_id: new_blocked_phrase.id,
-      screen_name: name,
-      mutedtweet: tweet)
-    end
+    array_of_screen_names.zip(array_of_tweets).to_h
   end
 
   def self.phrase_to_unmute(blocked_phrase_id)
