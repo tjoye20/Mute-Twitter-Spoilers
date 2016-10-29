@@ -1,12 +1,7 @@
 <section>
-  <%= render "layouts/tweets_menu" %>
-  <br />
+  <%= render "layouts/tweets_menu" %> <br />
 
-  <section class="ui compact message">
-    <p class="header">
-      There are currently <%= @results.length %> people tweeting about "<%= @phrase %>" on your timeline.
-    </p>
-  </section>
+  <%= render "layouts/search_status" %>
 
   <% @results.each do |tweet| %>
     <section class="ui grid">
