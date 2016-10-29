@@ -9,19 +9,17 @@
   </section>
 
   <% @results.each do |tweet| %>
-  <section class="ui grid">
-    <section class="ui list">
-      <section class="item two wide">
-        <%= image_tag(tweet.user.profile_image_url, class: "ui avatar image") %>
-        <section class="content two wide">
-          <h3 class="header">
-            Username: <%= tweet.user.screen_name %>
-          </h3>
+    <section class="ui grid">
+      <section class="ui list">
+        <section class="item two wide">
+          <%= image_tag(tweet.user.profile_image_url, class: "ui avatar image") %>
+          <section class="content two wide">
+            <h3 class="header">
+              Username: <%= tweet.user.screen_name %>
+            </h3>
+          </section>
         </section>
       </section>
     </section>
-  </section>
   <% end %>
-  <br />
-  <%= render "layouts/tweets_menu" %>
 </section>
