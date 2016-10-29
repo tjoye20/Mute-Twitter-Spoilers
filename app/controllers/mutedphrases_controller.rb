@@ -7,9 +7,6 @@ class MutedphrasesController < ApplicationController
     end
   end
 
-  def new
-  end
-
   def results
     session[:search_phrase] = params[:phrase]
     @phrase = session[:search_phrase]
@@ -37,7 +34,9 @@ class MutedphrasesController < ApplicationController
   end
 
   def destroy
-    Phrase.unmute_phrase(params[:id], client)
+    phrase = Phrase.phrase_to_unmute(params[:id])
+    Follower.unmute_followers(phrase.id, client)
+    Phrase.delete_phrase(phrase)
     redirect_to mutedphrases_path
   end
 
@@ -54,39 +53,5 @@ class MutedphrasesController < ApplicationController
     end
     results
   end
-
-  # def mute_phrase(phrase_to_block)
-  #   results = search_results(phrase_to_block)
-  #   new_blocked_phrase = Phrase.create(
-  #   phrase: phrase_to_block,
-  #   user_id: current_user.id)
-  #   array_of_screen_names = []
-  #   array_of_tweets = []
-  #   results.each do |tweet|
-  #     if !array_of_screen_names.include?(tweet.user.screen_name)
-  #       array_of_screen_names << tweet.user.screen_name
-  #       array_of_tweets << tweet.text
-  #     end
-  #   end
-  #   hash_of_tweets_and_names = array_of_screen_names.zip(array_of_tweets).to_h
-  #   hash_of_tweets_and_names.each do |name, tweet|
-  #     client.mute(name)
-  #     Follower.create(
-  #     user_id: current_user.id,
-  #     phrase_id: new_blocked_phrase.id,
-  #     screen_name: name,
-  #     mutedtweet: tweet)
-  #   end
-  # end
-  #
-  # def unmute_phrase(blocked_phrase_id)
-  #   phrase = Phrase.find(blocked_phrase_id)
-  #   followers = Follower.where(phrase_id: phrase.id)
-  #   followers.each do |user|
-  #     client.unmute(user.screen_name)
-  #   end
-  #   phrase.destroy
-  #   followers.destroy_all
-  # end
 
 end

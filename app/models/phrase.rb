@@ -5,6 +5,8 @@ class Phrase < ApplicationRecord
   validates_presence_of :phrase
   validates_length_of :phrase, minimum: 1, too_short: "This entry is too short."
 
+  protected
+  
   def self.mute_phrase(phrase_to_block, results, current_user, client)
     new_blocked_phrase = Phrase.create(
     phrase: phrase_to_block,
@@ -28,14 +30,12 @@ class Phrase < ApplicationRecord
     end
   end
 
-  def self.unmute_phrase(blocked_phrase_id, client)
-    phrase = Phrase.find(blocked_phrase_id)
-    followers = Follower.where(phrase_id: phrase.id)
-    followers.each do |user|
-      client.unmute(user.screen_name)
-    end
+  def self.phrase_to_unmute(blocked_phrase_id)
+    Phrase.find(blocked_phrase_id)
+  end
+
+  def self.delete_phrase(phrase)
     phrase.destroy
-    followers.destroy_all
   end
 
 

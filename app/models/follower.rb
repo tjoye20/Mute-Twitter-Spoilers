@@ -5,11 +5,13 @@ class Follower < ApplicationRecord
   validates_presence_of :screen_name
   validates_length_of :screen_name, minimum: 1, too_short: "This entry is too short."
 
-  def self.mute_follower
+  protected
 
+  def self.unmute_followers(phrase_id, client)
+    followers = Follower.where(phrase_id: phrase_id)
+    followers.each do |user|
+      client.unmute(user.screen_name)
+    end
+    followers.destroy_all
   end
-
-  def self.unmute_followers
-
-  end 
 end
