@@ -22,13 +22,4 @@ class Phrase < ApplicationRecord
     array_of_screen_names.zip(array_of_tweets).to_h
   end
 
-  def self.phrase_to_unmute(blocked_phrase_id)
-    Phrase.find(blocked_phrase_id)
-  end
-
-  def self.delete_phrase(phrase)
-    phrase.destroy
-  end
-
-
 end

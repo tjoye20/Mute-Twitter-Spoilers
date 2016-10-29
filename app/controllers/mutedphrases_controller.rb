@@ -35,9 +35,9 @@ class MutedphrasesController < ApplicationController
   end
 
   def destroy
-    phrase = Phrase.phrase_to_unmute(params[:id])
+    phrase = Phrase.find(params[:id])
     Follower.unmute_followers(phrase.id, client)
-    Phrase.delete_phrase(phrase)
+    phrase.destroy
     redirect_to mutedphrases_path
   end
 
