@@ -6,11 +6,7 @@ class UsersController < ApplicationController
     else
       # profile image: auth_hash.info[:image]
       if !(User.find_by(username: auth_hash.info.nickname))
-        @user = User.create(
-        username: auth_hash.info.nickname,
-        token: auth_hash.credentials.token,
-        secret: auth_hash.credentials.secret
-        )
+        @user = User.create_user(auth_hash)
       else
         @user = User.find_by(username: auth_hash.info.nickname)
       end
