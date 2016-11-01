@@ -4,7 +4,6 @@ class UsersController < ApplicationController
     if params[:denied]
       redirect_to sessions_path
     else
-      # profile image: auth_hash.info[:image]
       if !(User.find_by(username: auth_hash.info.nickname))
         @user = User.create_user(auth_hash)
       else

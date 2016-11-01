@@ -1,9 +1,7 @@
 
   <%= form_tag(results_mutedphrases_path, method: "get", class: "ui middle aligned center aligned grid") do %>
-
-  <%=link_to("Home", mutedphrases_path, class: "ui primary button") %>
-
+    <%=link_to("Home", mutedphrases_path, class: "ui primary button") %>
     <%= label_tag(:q, "What spoiler phrase do you want to mute?") %> <br />
-     <%= text_field_tag(:phrase) %>
+    <%= text_field_tag(:phrase) %>
     <%= submit_tag("Search") %>
   <% end %>
